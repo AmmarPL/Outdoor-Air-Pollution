@@ -789,18 +789,18 @@
 <variantdefs>
 </variantdefs>
 <classes>
-<class number="0" name="default" width="0.3048" drill="0.508">
+<class number="0" name="default" width="0.508" drill="0.3048">
 <clearance class="0" value="0.254"/>
 </class>
 <class number="1" name="New Class" width="0" drill="0">
 </class>
 </classes>
 <parts>
-<part name="SDS011" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X4" device="" package3d_urn="urn:adsk.eagle:package:22407/2" value="Dust Sensor"/>
-<part name="DHT22" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X3" device="" package3d_urn="urn:adsk.eagle:package:22458/2" value="Temp&amp;Humidity"/>
+<part name="SDS011" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X4" device="" package3d_urn="urn:adsk.eagle:package:22407/2"/>
+<part name="DHT22" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X3" device="" package3d_urn="urn:adsk.eagle:package:22458/2"/>
 <part name="LNODEMCU" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X15" device="" package3d_urn="urn:adsk.eagle:package:22424/2"/>
 <part name="RNODEMCU" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X15" device="" package3d_urn="urn:adsk.eagle:package:22424/2"/>
-<part name="GROVE" library="pinhead" deviceset="PINHD-1X4" device="M" value="Gases sensor"/>
+<part name="GROVE" library="pinhead" deviceset="PINHD-1X4" device="M"/>
 </parts>
 <sheets>
 <sheet>

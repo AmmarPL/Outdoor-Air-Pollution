@@ -1,0 +1,5 @@
+Node1: 
+	MAC: 3C:71:BF:32:6E:D3
+
+Node2: 
+	MAC: 3C:71:BF:32:8F:60

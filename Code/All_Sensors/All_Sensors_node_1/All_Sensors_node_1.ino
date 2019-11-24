@@ -1,4 +1,5 @@
 
+
 //Libraries
 #include <ThingSpeak.h>
 #include "ESP8266WiFi.h"
@@ -45,7 +46,7 @@ unsigned long age;
 
 //ONEM2M
 int post(String ae, String container, String data) {
-  String server = "http://139.59.42.21:8080";
+  String server = "http://onem2m.iiit.ac.in:80";
   String cse = "/~/in-cse/in-name/";
   char m2m[200];
   String Data;
@@ -80,7 +81,8 @@ static void smartdelay(unsigned long ms) {
   } while (millis() - start < ms);
 }
 
-static void print_float(float val, float invalid, int len, int prec) {
+static void print_float(float val, float invalid, int len, int prec, int md) {
+  char *temp;
   if (val == invalid) {
     while (len-- > 1){
       Serial.print('*');
@@ -89,8 +91,12 @@ static void print_float(float val, float invalid, int len, int prec) {
     Serial.print(' ');
   }
   else{
+    char temp[50];
+    sprintf(temp, "%.6f", val);
     Serial.print(val, prec);
-    data = data + String(val);
+    data = data + String(temp);
+    if(md == 0) ThingSpeak.setLatitude(String(temp));
+    if(md == 1) ThingSpeak.setLongitude(String(temp));
     int vi = abs((int)val);
     int flen = prec + (val < 0.0 ? 2 : 1); // . and -
     flen += vi >= 1000 ? 4 : vi >= 100 ? 3 : vi >= 10 ? 2 : 1;
@@ -207,8 +213,8 @@ void loop() {
 
 
     gps.f_get_position(&flat, &flon, &age);
-    print_float(flat, TinyGPS::GPS_INVALID_F_ANGLE, 10, 6);
-    print_float(flon, TinyGPS::GPS_INVALID_F_ANGLE, 11, 6);
+    print_float(flat, TinyGPS::GPS_INVALID_F_ANGLE, 10, 6, 0);
+    print_float(flon, TinyGPS::GPS_INVALID_F_ANGLE, 11, 6, 1);
     Serial.println();
     print_date(gps);
     smartdelay(1000);
@@ -219,10 +225,10 @@ void loop() {
     int response;
     if((response = ThingSpeak.writeFields(Channel_ID, API_KEY)) == 200) {
       Serial.println("Data Updated to ThingSpeak successfully!");
-    }
+      }
     else {
       Serial.println("Problem Updating data for ThingSpeak!\nError code: " + String(response)); 
     }
-    delay(10 * 60000); //Delay 60 * 10 sec.
+    delay(15000); //Delay 15 sec.
     Serial.println("...\n\n\n\n\n\n\n");
 }

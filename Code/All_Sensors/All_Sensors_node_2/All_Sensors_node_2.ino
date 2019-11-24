@@ -9,20 +9,15 @@
 #include <ESP8266HTTPClient.h>
 #include <stdlib.h>
 #include <SoftwareSerial.h>
-#include <TinyGPS.h>
 
 
 //Constants
-#define DHTPIN D4    // what pin we're connected to
+#define DHTPIN D3    // what pin we're connected to
 #define DHTTYPE DHT22   // DHT 22  (AM2302)
 #define node_RX D5
 #define node_TX D6
 #define ADDR_I2C 0x04
 #define LED D0
-#define gps_RX D7
-#define gps_TX D3
-TinyGPS gps;
-SoftwareSerial ss(gps_TX, gps_RX);
 SDS011 my_sds;
 DHT dht(DHTPIN, DHTTYPE); // Initialize DHT sensor for normal 16mhz Arduino
  unsigned long Channel_ID=886431;
@@ -30,7 +25,7 @@ DHT dht(DHTPIN, DHTTYPE); // Initialize DHT sensor for normal 16mhz Arduino
 //char ssid[] = "JioFi_20E7D6C";
 //char psswd[] = "2wufpbqmx0";
 //char ssid[] = "esw-m19@iiith";
-//char psswd[] = "e5W-eMai@3!20hOct";
+//char psswd[] = "e5W-eMai@3!20t";
 //char ssid[] = "Nitro 5";
 //char psswd[] = "wvZu69eF";
 char ssid[] = "MGG5";
@@ -39,13 +34,12 @@ WiFiClient  client;
 
 //Variables
 int chk, error;
-float hum, temp, p10, p25, c, flat, flon;
+float hum, temp, p10, p25, c;
 String data;
-unsigned long age;
 
 //ONEM2M
 int post(String ae, String container, String data) {
-  String server = "http://139.59.42.21:8080";
+  String server = "http://onem2m.iiit.ac.in:80";
   String cse = "/~/in-cse/in-name/";
   char m2m[200];
   String Data;
@@ -72,54 +66,6 @@ void update(int val) {
   else Serial.println("There was an error while uploading Data to OneM2M. Error Code: " + String(val));
 }
 
-static void smartdelay(unsigned long ms) {
-  unsigned long start = millis();
-  do {
-    while (ss.available())
-      gps.encode(ss.read());
-  } while (millis() - start < ms);
-}
-
-static void print_float(float val, float invalid, int len, int prec) {
-  if (val == invalid) {
-    while (len-- > 1){
-      Serial.print('*');
-      data = data + '*';
-    }
-    Serial.print(' ');
-  }
-  else{
-    Serial.print(val, prec);
-    data = data + String(val);
-    int vi = abs((int)val);
-    int flen = prec + (val < 0.0 ? 2 : 1); // . and -
-    flen += vi >= 1000 ? 4 : vi >= 100 ? 3 : vi >= 10 ? 2 : 1;
-    for (int i=flen; i<len; ++i)
-      Serial.print(' ');
-  }
-  data = data + ',';
-  smartdelay(0);
-}
-
-static void print_date(TinyGPS &gps) {
-  int year;
-  byte month, day, hour, minute, second, hundredths;
-  unsigned long age;
-  gps.crack_datetime(&year, &month, &day, &hour, &minute, &second, &hundredths, &age);
-  if (age == TinyGPS::GPS_INVALID_AGE) {
-    Serial.print("********** ******** ");
-    data = data + "********** ******** ";
-  }
-  else {
-    char sz[32];
-    sprintf(sz, "%02d/%02d/%02d %02d:%02d:%02d ",
-        month, day, year, hour, minute, second);
-    Serial.print(sz);
-    data = data + sz;
-  }
-  smartdelay(0);
-}
-
 void setup(){
   pinMode(LED, OUTPUT);
   Serial.begin(115200);
@@ -133,7 +79,6 @@ void setup(){
   WiFi.disconnect();
   ThingSpeak.begin(client);
   digitalWrite(LED, HIGH);
-  ss.begin(9600);
   delay(10000);
 }
 
@@ -206,12 +151,7 @@ void loop() {
     data = data + String(c) + ',';
 
 
-    gps.f_get_position(&flat, &flon, &age);
-    print_float(flat, TinyGPS::GPS_INVALID_F_ANGLE, 10, 6);
-    print_float(flon, TinyGPS::GPS_INVALID_F_ANGLE, 11, 6);
-    Serial.println();
-    print_date(gps);
-    smartdelay(1000);
+    
     data = data + ",OAP4_2";
     
     update(post("Team6_Outdoor_air_pollution_mobile/", "node_2", data));
@@ -223,6 +163,6 @@ void loop() {
     else {
       Serial.println("Problem Updating data for ThingSpeak!\nError code: " + String(response)); 
     }
-    delay(10 * 60000); //Delay 60 * 10 sec.
+    delay(15000); //Delay 15 sec.
     Serial.println("...\n\n\n\n\n\n\n");
 }

@@ -1,0 +1,70 @@
+<html>
+
+<head>
+    <title> Location</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <script src="../static/js/jquery.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+</head>
+
+<body onload="res()" style="display:flex; justify-content: center;">
+    <div class="container col-lg-7">
+        <p id="demo"></p>
+        <h1>Update Location:</h1>
+        <form class="form-horizontal" name="add_loc" action="" method="POST" id="add_loc">
+            <div class="form-group">
+                <input type="button" class="btn btn-default" value="Get my location" id="loca_get" onclick="tryGeolocation()">
+            </div>
+            <p id="demo"></p>
+            <div class="form-group">
+                <div class="col-sm-5">
+                    <label for="lat"><b>Latitude:</b></label>
+                    <input type="text" class="form-control" name="lat" id="lat" placeholder="Enter Latitude"
+                        required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-5">
+                    <label for="lon"><b>Longitude:</b></label>
+                    <input type="text" class="form-control" name="lon" id="lon" placeholder="Enter Longitude"
+                        required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-5">
+                    <label for="todo"><b>Add or Update?</b></label>
+                    <select class="form-control" name="todo" id="todo" required>
+                        <option value="upd">Update</option>
+                        <option value="add">Add</option>
+                    </select>
+                </div>
+            </div>
+            <input type="button" class="btn btn-default" value="Submit" id="addD">
+        </form>
+    </div>
+    <div class="container col-lg-5">
+        <div class="row container-fluid">
+            <h1>OR...</h1>
+            <h2>Enter ID of the Location to delete:</h2>
+            <form class="form-horizontal" name="del_loc" action="" method="GET" id="del_loc">
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <label for="ID"><b>ID to delete:</b></label>
+                        <input type="number" class="form-control" name="ID" id="ID"
+                            placeholder="Enter the ID of the location value" min="0" required>
+                    </div>
+                </div>
+                <input type="submit" class="btn btn-default" value="Delete">
+            </form>
+        </div>
+        <div class="row container-fluid">
+            <h1>OR...</h1>
+            <h2>Click <a href="http://0.0.0.0:5000/loc/all" target="blank">here</a> to view all values!</h2>
+        </div>
+    </div>
+</body>
+<script src="../static/js/script.js"></script>
+
+</html>

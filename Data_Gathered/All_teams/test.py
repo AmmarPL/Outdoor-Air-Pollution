@@ -9,6 +9,7 @@ def teams_reset():
             1: -1,
             # 45: -1,
             6: -1,
+            2: -1,
             # 20: -1,
             11: -1
         },
@@ -16,6 +17,7 @@ def teams_reset():
             1: -1,
             # 45: -1,
             6: -1,
+            2: -1,
             # 20: -1,
             11: -1
         },
@@ -23,6 +25,7 @@ def teams_reset():
             1: -1,
             # 45: -1,
             6: -1,
+            2: -1,
             # 20: -1,
             11: -1
         },
@@ -30,6 +33,7 @@ def teams_reset():
             1: -1,
             # 45: -1,
             6: -1,
+            2: -1,
             # 20: -1,
             11: -1
         },
@@ -37,6 +41,7 @@ def teams_reset():
             1: -1,
             # 45: -1,
             6: -1,
+            2: -1,
             # 20: -1,
             11: -1
         },
@@ -44,6 +49,7 @@ def teams_reset():
             1: -1,
             # 45: -1,
             6: -1,
+            2: -1,
             # 20: -1,
             11: -1
         },
@@ -51,6 +57,7 @@ def teams_reset():
             1: -1,
             # 45: -1,
             6: -1,
+            2: -1,
             # 20: -1,
             11: -1
         }
@@ -80,7 +87,7 @@ def teams_reset():
 #         'sty': '-'
 #     }
 # }
-team_numbers = [6, 11, 1]
+team_numbers = [1, 2]
 # team_numbers = [6, 1, 45, 20, 11]
 
 for i in team_numbers:
@@ -165,5 +172,5 @@ for j in sorted(data.keys()):
         final = final + str(data[j]['pm10'][i]) + ','
     final = final + "\n"
 print("Done!")
-with open('final.csv', 'x') as file:
+with open('comparison.csv', 'x') as file:
     file.write(final)

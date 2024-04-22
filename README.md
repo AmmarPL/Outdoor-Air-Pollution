@@ -7,10 +7,6 @@ The air quality measurement device uses an ESP8266 microcontroller to gather dat
 
 # Features
 Sensor Integration: Incorporates multiple sensors to measure various pollutants, with a focus on PM10 particulate matter.
-<img width="316" alt="image" src="https://github.com/AmmarPL/Outdoor-Air-Pollution/assets/46021351/52c26f0b-8c43-4551-89b8-c95b80e94eb7"> <img width="368" alt="image" src="https://github.com/AmmarPL/Outdoor-Air-Pollution/assets/46021351/be85bf8f-74a9-4601-bb03-02aa97479486"> <img width="322" alt="image" src="https://github.com/AmmarPL/Outdoor-Air-Pollution/assets/46021351/1f8980f1-c8e0-461b-a8dc-804e426b2e22">
-
-
-
 
 Connectivity: Uses an ESP8266 microcontroller for processing sensor data and providing Wi-Fi connectivity.
 <img width="592" alt="image" src="https://github.com/AmmarPL/Outdoor-Air-Pollution/assets/46021351/1aa5a4be-ac97-4041-966d-a729af800239">

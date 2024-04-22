@@ -22,9 +22,11 @@ EagleCAD Design: Custom PCB design for neatly organized and efficient sensor int
 
 # Results
 We found that some of the air quality indicators had a bad spike around Diwali.
+
 <img width="332" alt="image" src="https://github.com/AmmarPL/Outdoor-Air-Pollution/assets/46021351/da802338-fe0a-4765-bea2-e13a00feab46">
 
 We also found that these spikes were concentrated around the student residences. 
+
 <img width="797" alt="image" src="https://github.com/AmmarPL/Outdoor-Air-Pollution/assets/46021351/d2248ce1-97d8-4a18-b08b-9c988d08bad0">
 
 Both these plots are for PM10, but similar spikes were found in PM2.5 and CO, but not with NH3 and NO2.
